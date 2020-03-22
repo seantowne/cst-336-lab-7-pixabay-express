@@ -1,66 +1,39 @@
-const express = require("express");
-const app = express();
-app.set("view engine", "ejs");
-app.use(express.static("public")); //folder for images, css, js
-
-const request = require('request');
-
-//routes
-app.get("/", async function(req, res){
-    
- let parsedData = await getImages("otters");
- 
- console.dir("parsedData: " + parsedData); //displays content of the object
-    
- res.render("index", {"image":parsedData.hits[0].largeImageURL});
-            
-}); //root route
+var express = require("express");
+var bodyParser = require("body-parser");
+var app = express();
+var fs = require('fs');
+var request = require('request');
 
 
-app.get("/results", async function(req, res){
-    
-    //console.dir(req);
-    let keyword = req.query.keyword; //gets the value that the user typed in the form using the GET method
-    
-    let parsedData = await getImages(keyword);
 
-    res.render("results", {"images":parsedData});
-    
-});//results route
+// set the template engine to ejs
+app.set('view engine', 'ejs');
 
+// Tells node to look in public/ for styles
+app.use(express.static("public"));
 
-//Returns all data from the Pixabay API as JSON format
-function getImages(keyword){
-    
-    
-    return new Promise( function(resolve, reject){
-        request('https://pixabay.com/api/?key=5589438-47a0bca778bf23fc2e8c5bf3e&q='+keyword,
-                 function (error, response, body) {
-    
-            if (!error && response.statusCode == 200  ) { //no issues in the request
-                
-                 let parsedData = JSON.parse(body); //converts string to JSON
-                 
-                 resolve(parsedData);
-                
-                //let randomIndex = Math.floor(Math.random() * parsedData.hits.length);
-                //res.send(`<img src='${parsedData.hits[randomIndex].largeImageURL}'>`);
-                //res.render("index", {"image":parsedData.hits[randomIndex].largeImageURL});
-                
-            } else {
-                reject(error);
-                console.log(response.statusCode);
-                console.log(error);
-            }
-    
-          });//request
-   
-    });
-    
-}
+// makes data that comes to the server from the client a json object
+app.use(bodyParser.urlencoded({extended: true}));
+
+// route to base domain
+app.get("/", function(req, res){
+    res.render("home.ejs");
+});
+
+// route to base domain
+app.get("/home", function(req, res){
+    res.render("home.ejs");
+});
 
 
-//starting server
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("Express server is running...");
+
+// anything that hasn't matched a defined route is caught here
+app.get("/*", function(req, res){
+    res.render("error.ejs");
+});
+
+// listens for http requests
+// port 3000 is for C9, port 8080 is for Heroku
+app.listen(process.env.PORT || 3000 || 8080, function(){
+    console.log("Server is running");
 });
