@@ -1,3 +1,16 @@
 <%- include('templates/header.ejs') -%>
-    <h1>Hello, World!</h1>
+    <h1>Lab 7 Pixabay Search</h1>
+    
+    <form id='mainForm' action='/search', method='POST'>
+        <div id='searchInput' class='form-group'>
+            <div class="row">
+                <input class='form-control col-4' id='search-term-text-input' type='text' placeholder='search term' name='search-term-text-input'>
+                <select class='form-control col-4' id='vertical-or-horizontal-select'>
+                    <option class='form-control' id='vertical-option' value='vertical'>Vertical</option>
+                    <option class='form-control' id='horizontal-option' value='horizontal'>Horizontal</option>
+                </select>
+                <button id='submit' class="form-control btn-primary col-4" type='submit'>Submit</button>
+            </div>
+        </div>
+    </form>
 <%- include('templates/footer.ejs') -%>
