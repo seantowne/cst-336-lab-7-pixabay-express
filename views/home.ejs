@@ -1,11 +1,12 @@
 <%- include('templates/header.ejs') -%>
-    <h1>Lab 7 Pixabay Search</h1>
     
-    <form id='mainForm' action='/search', method='POST'>
+    <form id='mainForm' action='/home', method='POST' class='jumbotron'>
+        <h1>Lab 7 Pixabay Search</h1>
+        <p>Search for four random images from Pixabay based on a search term and orientation</p>
         <div id='searchInput' class='form-group'>
             <div class="row">
-                <input class='form-control col-2' id='search-term-text-input' type='text' placeholder='search term' name='search-term-text-input'>
-                <select class='form-control col-2' id='vertical-or-horizontal-select'>
+                <input class='form-control col-8' id='searchTerm' type='text' placeholder='search term' name='searchTerm'>
+                <select class='form-control col-2' id='vertical-or-horizontal-select' name="orientation">
                     <option class='form-control' id='vertical-option' value='vertical'>Vertical</option>
                     <option class='form-control' id='horizontal-option' value='horizontal'>Horizontal</option>
                 </select>
@@ -13,4 +14,12 @@
             </div>
         </div>
     </form>
+    <div class="flex-container">
+        <div class="flex-item">
+            <%- include('templates/card.ejs', {link:data.img1.url, likes:data.img1.likes}) -%>
+            <%- include('templates/card.ejs', {link:data.img2.url, likes:data.img2.likes}) -%>
+            <%- include('templates/card.ejs', {link:data.img3.url, likes:data.img3.likes}) -%>
+            <%- include('templates/card.ejs', {link:data.img4.url, likes:data.img4.likes}) -%>
+        </div>
+    </div>
 <%- include('templates/footer.ejs') -%>

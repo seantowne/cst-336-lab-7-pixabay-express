@@ -1,8 +1,21 @@
 h1 {
     text-align: center;
+    padding-bottom: 40px;
 }
 
-#mainForm{
-    display: block;
-    margin: auto;
+p{
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.flex-item{
+    width: 30%;
+    margin: 10px;
 }
