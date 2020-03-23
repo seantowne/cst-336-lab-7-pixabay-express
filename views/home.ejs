@@ -15,11 +15,9 @@
         </div>
     </form>
     <div class="flex-container">
-        <div class="flex-item">
-            <%- include('templates/card.ejs', {link:data.img1.url, likes:data.img1.likes}) -%>
-            <%- include('templates/card.ejs', {link:data.img2.url, likes:data.img2.likes}) -%>
-            <%- include('templates/card.ejs', {link:data.img3.url, likes:data.img3.likes}) -%>
-            <%- include('templates/card.ejs', {link:data.img4.url, likes:data.img4.likes}) -%>
-        </div>
+        <%- include('templates/card.ejs', {link:data.img1.url, likes:data.img1.likes}) -%>
+        <%- include('templates/card.ejs', {link:data.img2.url, likes:data.img2.likes}) -%>
+        <%- include('templates/card.ejs', {link:data.img3.url, likes:data.img3.likes}) -%>
+        <%- include('templates/card.ejs', {link:data.img4.url, likes:data.img4.likes}) -%>
     </div>
 <%- include('templates/footer.ejs') -%>
